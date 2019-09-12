@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         RB.MovePosition(RB.position + movement * MoveSpeed * Time.fixedDeltaTime);
 
         Vector2 lookDir = MousePos - RB.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         RB.rotation = angle;
     }
 

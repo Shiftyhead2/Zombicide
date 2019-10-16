@@ -9,8 +9,21 @@ public class FovDetection : MonoBehaviour
     [SerializeField] LayerMask obstacleMask, playerMask;
     Collider2D[] playerinRadius;
     public List<Transform> VisiblePlayer = new List<Transform>();
+    EnemyAI Ai;
 
-     void FixedUpdate()
+
+    private void Start()
+    {
+        Ai = GetComponent<EnemyAI>();
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, viewRadius);
+    }
+
+    void FixedUpdate()
     {
         FindVisiblePlayer();
     }
@@ -33,6 +46,12 @@ public class FovDetection : MonoBehaviour
                     if (Physics2D.Raycast(transform.position, dirTarget, distancePlayer, playerMask))
                     {
                         VisiblePlayer.Add(player);
+                        if (!Ai.DetectedTarget)
+                        {
+                            Ai.DetectedTarget = true;
+                        }
+                        
+
                     }
                     else
                     {
